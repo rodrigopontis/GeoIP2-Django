@@ -4,8 +4,24 @@ import geoip2.database
 import folium
 
 
-# def home(request):
-#     return render(request, 'mapamundi/teste.html')
+def criarMarcacao(request):
+    # Sempre que houver uma conexão == Marcar ponto no mapa
+
+    # Atualização de mapa por x periodo
+
+    # Desmarcar ponto no mapa ao perder conexão com ponto
+    return 0
+
+
+def removerMarcacao(request):
+    # Sempre que houver uma conexão == Marcar ponto no mapa
+
+    # Atualização de mapa por x periodo
+
+    # Desmarcar ponto no mapa ao perder conexão com ponto
+    return 0
+
+
 def home2(request):
 
     # Pega metadados do request
@@ -16,37 +32,45 @@ def home2(request):
     #     ip = request.META.get('REMOTE_ADDR')
 
     m = folium.Map(location=[19, -12], zoom_start=2)
-    # Transformar mapa objeto em elemento html
-    m = m._repr_html_()
+    mBrasil = folium.Map(location=[-20, -65], zoom_start=4)
 
-    ip = '179.83.85.15'
+
+    ip = '181.222.1.53'
+
+    # Informações dispositivo
     device_type = ""
     browser_type = ""
     browser_version = ""
     os_type = ""
     os_version = ""
-
     if request.user_agent.is_mobile:
         device_type = "Mobile"
     if request.user_agent.is_tablet:
         device_type = "Tablet"
     if request.user_agent.is_pc:
         device_type = "PC"
-
     browser_type = request.user_agent.browser.family
     browser_version = request.user_agent.browser.version_string
     os_type = request.user_agent.os.family
     os_version = request.user_agent.os.version_string
 
+    #Dados do GeoIP2
     g = GeoIP2()
     location = g.city(ip)
-
     latitude = location["latitude"]
     longitude = location["longitude"]
-    # state_name = location.get("subdivisions", [])[1].get("name")
-
     location_country = location["country_name"]
     location_city = location["city"]
+    myAddress = [latitude, longitude]
+
+    #Criando Marcações
+    folium.CircleMarker(location=(myAddress), radius=30,
+                        popup="Loc").add_to(m)
+    folium.Marker(myAddress, popup="Loc").add_to(m)
+    
+    # Transformar mapa objeto em elemento html
+    mBrasil = mBrasil._repr_html_()
+    m = m._repr_html_()
 
     context = {
         "ip": ip,
@@ -60,7 +84,8 @@ def home2(request):
         "location_city": location_city,
         "latitude": latitude,
         "longitude": longitude,
-        "m": m
+        "m": m,
+        "mBrasil": mBrasil
         # "state_name": state_name
     }
     return render(request, "site/index.html", context)
