@@ -27,9 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #Apps
     'app_geoip',
+    
+    #Pips
+    'geoip2',
+    'bootstrap5',
     'django_user_agents',
-    'geoip2'
 ]
 
 MIDDLEWARE = [
@@ -113,7 +118,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIR = [
-    os.path.join(BASE_DIR,"static")
+    os.path.join(BASE_DIR, "static")
 ]
 
 # Default primary key field type

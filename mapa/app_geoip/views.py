@@ -16,7 +16,7 @@ def home2(request):
     #     ip = request.META.get('REMOTE_ADDR')
 
     m = folium.Map(location=[19, -12], zoom_start=2)
-
+    # Transformar mapa objeto em elemento html
     m = m._repr_html_()
 
     ip = '179.83.85.15'
@@ -62,7 +62,5 @@ def home2(request):
         "longitude": longitude,
         "m": m
         # "state_name": state_name
-
-
     }
     return render(request, "site/index.html", context)
