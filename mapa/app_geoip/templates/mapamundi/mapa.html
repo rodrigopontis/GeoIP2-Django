@@ -1,0 +1,32 @@
+
+
+<body>
+
+    <!--Mapa-->
+    <div class="container">
+
+        <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+                <h3>Map</h3>
+                {{m|safe}}
+            </div>
+        </div>
+        <!--Fim Mapa-->
+
+        <h1>Bem vindo!</h1>
+        <h3>Verificando o Host :</h3>
+        <ul>
+            <li>IP Address : {{ip}}</li>
+            <li>Device: {{ device_type}}</li>
+            <li>Browser: {{browser_type}} {{browser_version}}</li>
+            <li>OS: {{os_type}} {{os_version}}</li>
+            <li>City: {{ location_city }}</li>
+            <li>Country: {{ location_country }}</li>
+            <li>Latitude: {{ latitude }}</li>
+            <li>Longitude: {{ longitude }}</li>
+            <li>Estado: {{ state_name }}</li>
+            <li>Continente: {{ continent }}</li>
+        </ul>
+</body>
+
+</html>

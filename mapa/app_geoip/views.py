@@ -47,7 +47,7 @@ def home2(request):
 
     location_country = location["country_name"]
     location_city = location["city"]
-    continent = location["continent"]["names"]
+
     context = {
         "ip": ip,
         "device_type": device_type,
@@ -55,7 +55,7 @@ def home2(request):
         "browser_version": browser_version,
         "os_type": os_type,
         "os_version": os_version,
-        #"continente": continent,
+        # "continente": continent,
         "location_country": location_country,
         "location_city": location_city,
         "latitude": latitude,
@@ -65,4 +65,4 @@ def home2(request):
 
 
     }
-    return render(request, "mapamundi/teste.html", context)
+    return render(request, "site/index.html", context)
