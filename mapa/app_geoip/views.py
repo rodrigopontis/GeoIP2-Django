@@ -4,6 +4,7 @@ import geoip2.database
 import folium
 
 
+
 def criarMarcacao(request):
     # Sempre que houver uma conexão == Marcar ponto no mapa
 
@@ -20,6 +21,24 @@ def removerMarcacao(request):
 
     # Desmarcar ponto no mapa ao perder conexão com ponto
     return 0
+
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def index(request):
+    # Get all the IPLogs.
+    ip_logs = IPLog.objects.filter(time__gt=timezone.now() - timedelta(minutes=1))
+
+    # Render the template with the IPLogs.
+    template = loader.get_template("index.html")
+    context = {
+        "ip_logs": ip_logs,
+    }
+    return HttpResponse(template.render(context, request))
+
 
 
 def home2(request):
